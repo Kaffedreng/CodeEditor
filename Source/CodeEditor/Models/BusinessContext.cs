@@ -1,26 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EnterpriseMVVM.Data {
+namespace CodeEditor.Models {
 
+    // TODO: Document
     public sealed class BusinessContext : IDisposable {
 
         private readonly DataContext context;
         private bool disposed;
 
+        // TODO: Document
         public BusinessContext() {
             context = new DataContext();
         }
 
+        // TODO: Document
         public DataContext DataContext {
             get {
                 return context;
             }
         }
 
+        // TODO: Document
         public void AddNewCustomer(Customer customer) {
 
             Check.Require(customer.Email);

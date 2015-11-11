@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace EnterpriseMVVM.Windows {
+namespace CodeEditor.ViewModels {
 
     public class ActionCommand : ICommand {
 

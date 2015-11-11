@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 
-namespace EnterpriseMVVM.Windows {
+namespace CodeEditor.ViewModels {
 
     using System.ComponentModel;
 
+    // TODO: Document
     public class ObservableObject : INotifyPropertyChanged {
 
+        // TODO: Document
         public event PropertyChangedEventHandler PropertyChanged;
 
+        // TODO: Document
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "") {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) {

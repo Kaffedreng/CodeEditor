@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 
-namespace EnterpriseMVVM.Data {
+namespace CodeEditor.Models {
 
     public class DataContext : DbContext {
 

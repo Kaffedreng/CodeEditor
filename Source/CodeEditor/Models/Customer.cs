@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EnterpriseMVVM.Data {
+namespace CodeEditor.Models {
 
     public class Customer {
 
