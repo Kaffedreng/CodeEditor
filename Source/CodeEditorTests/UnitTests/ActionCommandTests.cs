@@ -1,7 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using CodeEditor.ViewModels;
 
-namespace EnterpriseMVVM.Windows.Tests.UnitTests {
+namespace CodeEditorTests.UnitTests {
 
     [TestClass]
     public class ActionCommandTests {

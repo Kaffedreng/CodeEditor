@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
+using CodeEditor.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace EnterpriseMVVM.Data.Tests.UnitTests {
+namespace CodeEditorTests.UnitTests {
 
     [TestClass]
     public class BusinessContextTests {

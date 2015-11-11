@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Data.Entity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using CodeEditor.Models;
 
-namespace EnterpriseMVVM.Data.Tests.UnitTests {
+namespace CodeEditorTests.FunctionalTests {
 
     [TestClass]
     public class FunctionalTest {

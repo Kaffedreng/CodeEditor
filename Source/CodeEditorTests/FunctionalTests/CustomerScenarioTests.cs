@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using EnterpriseMVVM.Data;
+using CodeEditor.Models;
 
-namespace EnterpriseMVVM.Data.Tests.UnitTests {
+namespace CodeEditorTests.FunctionalTests {
 
     [TestClass]
     public class CustomerScenarioTests : FunctionalTest {

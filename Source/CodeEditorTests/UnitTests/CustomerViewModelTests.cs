@@ -1,9 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using EnterpriseMVVM.Desktop.ViewModels;
-using EnterpriseMVVM.Windows;
+using CodeEditor.ViewModels;
 
-namespace EnterpriseMVVM.DesktopClient.Tests.UnitTests {
+namespace CodeEditorTests.UnitTests {
 
     [TestClass]
     public class CustomerViewModelTests {

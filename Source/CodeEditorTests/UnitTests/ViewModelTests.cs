@@ -2,8 +2,9 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using CodeEditor.ViewModels;
 
-namespace EnterpriseMVVM.Windows.Tests.UnitTests {
+namespace CodeEditorTests.UnitTests {
 
     [TestClass]
     public class ViewModelTests {

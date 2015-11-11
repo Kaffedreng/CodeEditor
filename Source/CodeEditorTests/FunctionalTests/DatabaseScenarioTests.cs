@@ -1,7 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using CodeEditor.Models;
 
-namespace EnterpriseMVVM.Data.Tests.FunctionalTests {
+namespace CodeEditorTests.FunctionalTests {
 
     [TestClass]
     public class DatabaseScenarioTests {
