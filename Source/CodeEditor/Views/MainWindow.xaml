@@ -1,12 +1,17 @@
-﻿<Window x:Class="CodeEditor.MainWindow"
+﻿<Window x:Class="CodeEditor.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CodeEditor"
+        xmlns:local="clr-namespace:CodeEditor.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Code Editor" Height="350" Width="525">
     <Grid>
-        
+        <Menu x:Name="menu" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="517">
+            <MenuItem Header="File" Margin="0" VerticalAlignment="Center" Height="20"/>
+        </Menu>
+        <DockPanel Margin="0, 20, 0, 0">
+            <TextBox Text="{Binding TextBlock, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" FontFamily="Consolas" FontSize="11" AcceptsReturn="True" AcceptsTab="True" IsUndoEnabled="False" TextWrapping="Wrap" BorderThickness="1" BorderBrush="#FF0C0C0C" />
+        </DockPanel>
     </Grid>
 </Window>
