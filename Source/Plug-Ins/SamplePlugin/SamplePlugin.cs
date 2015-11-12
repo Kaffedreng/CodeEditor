@@ -18,8 +18,13 @@ namespace CodeEditor.Plugins {
             }
         }
 
+        public void Initialize()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Do() {
-            System.Windows.MessageBox.Show("This is a Sample Plugin.");
+            MessageBox.Show("This is a Sample Plugin.");
         }
     }
 }
