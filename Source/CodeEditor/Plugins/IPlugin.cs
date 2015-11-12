@@ -10,6 +10,8 @@ namespace CodeEditor.Plugins {
 
         string Name { get; }
 
+        void Initialize();
+
         void Do();
     }
 }
