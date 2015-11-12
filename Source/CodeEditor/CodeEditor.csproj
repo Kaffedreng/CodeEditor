@@ -79,6 +79,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModels\ObservableObject.cs" />
+    <Compile Include="Plugins\IPlugin.cs" />
+    <Compile Include="Plugins\PluginLoader.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
