@@ -69,6 +69,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\PluginInfo.cs" />
+    <Compile Include="ViewModels\PluginManagerVM.cs" />
     <Compile Include="Views\PluginManager.xaml.cs">
       <DependentUpon>PluginManager.xaml</DependentUpon>
     </Compile>

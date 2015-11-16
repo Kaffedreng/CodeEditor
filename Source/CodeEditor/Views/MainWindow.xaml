@@ -10,6 +10,7 @@
     <Grid>
         <Menu x:Name="menu" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="517">
             <MenuItem Header="File" Margin="0" VerticalAlignment="Center" Height="20"/>
+            <MenuItem Header="PluginManager" Margin="0" VerticalAlignment="Center" Height="20"/>
         </Menu>
         <DockPanel Margin="0, 20, 0, 0">
             <TextBox Text="{Binding TextBlock, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" FontFamily="Consolas" FontSize="11" AcceptsReturn="True" AcceptsTab="True" IsUndoEnabled="False" TextWrapping="Wrap" BorderThickness="1" BorderBrush="#FF0C0C0C" />
