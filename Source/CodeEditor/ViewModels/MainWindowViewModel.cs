@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CodeEditor.ViewModels {
 
@@ -11,6 +12,7 @@ namespace CodeEditor.ViewModels {
         //private readonly IBootstrap bootstrap;
         //private Encoding encoding;
         private string text;
+        public MainWindowViewModel() {
 
         //private readonly IEventAggregator eventAggregator = new EventAggregator();
 
@@ -109,6 +111,8 @@ namespace CodeEditor.ViewModels {
         //private void NewFile() {
         //    this.Text = string.Empty;
         //}
+            Console.WriteLine("Loaded MainWindowViewModel");
+        }
 
     }
 }

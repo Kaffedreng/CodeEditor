@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace CodeEditor.ViewModels {
 
+    /// <summary>
+    /// A base class for all View Models.
+    /// </summary>
     public abstract class ViewModel : ObservableObject, IDataErrorInfo {
 
         public string this[string columnName] {
