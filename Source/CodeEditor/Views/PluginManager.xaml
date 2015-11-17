@@ -3,6 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="PluginManager" Height="300" Width="300">
     <Grid>
-        
+        <ListView Margin="8" Height="auto" Width="auto" 
+    ItemsSource="{Binding Source=plugins}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Sejt!" Width="100"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

@@ -6,17 +6,28 @@ using System.Text;
 using System.Threading.Tasks;
 using CodeEditor.Plugins;
 using CodeEditor.Views;
+using System.Windows.Input;
 
 namespace CodeEditor.ViewModels
 {
-    
-    internal class PluginManagerVm
+    public class PluginManagerVm
     {
-        private PluginInfo _childViewModel;
+        private readonly PluginInfo _childViewModel;
 
         public PluginManagerVm()
         {
             _childViewModel = new PluginInfo();
+        }
+
+        /// <summary>
+        /// Gets the UpdateCommand for the ViewModel
+        /// </summary>
+        public ICommand UpdateCommand
+        {
+            get
+            {
+                return new ActionCommand(o => Show());   
+            }
         }
 
         public void Show()
