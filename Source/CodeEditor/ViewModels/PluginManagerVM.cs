@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -13,10 +14,19 @@ namespace CodeEditor.ViewModels
     public class PluginManagerVm
     {
         private readonly PluginInfo _childViewModel;
-
+        private ObservableCollection<IPlugin> pluginsCollection;
+ 
         public PluginManagerVm()
         {
             _childViewModel = new PluginInfo();
+        }
+
+        public ObservableCollection<IPlugin> plugins
+        {
+            get
+            {
+                return new ObservableCollection<IPlugin>(Bootstrap.plugins.Values);
+            }
         }
 
         /// <summary>
@@ -37,8 +47,7 @@ namespace CodeEditor.ViewModels
                 DataContext = _childViewModel
             };
 
-            _childViewModel.Info = " was updated in the database.";
-
+            
             view.ShowDialog();
         }
     }

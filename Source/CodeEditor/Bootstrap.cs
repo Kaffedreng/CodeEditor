@@ -11,7 +11,7 @@ namespace CodeEditor {
 
     public static class Bootstrap {
 
-        private static Dictionary<string, IPlugin> plugins;
+        public static Dictionary<string, IPlugin> plugins;
 
         public static void Initialize() {
 
@@ -28,11 +28,10 @@ namespace CodeEditor {
                     plugins.Add(item.Name, item);
                 }
 
-                // Initialize Plug-Ins
+               // Initialize Plug-Ins
                 foreach (var item in plugins)
                 {
                     IPlugin plugin = item.Value;
-                    plugin.Initialize();
                     plugin.Do();
                 }
             }

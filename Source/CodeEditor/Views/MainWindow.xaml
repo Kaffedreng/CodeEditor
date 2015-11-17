@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="Code Editor" Height="350" Width="525">
     <Window.Resources>
-        <vm:PluginManagerVm x:Key="ViewModel"></vm:PluginManagerVm>
+        <viewModels:PluginManagerVm x:Key="ViewModel"></viewModels:PluginManagerVm>
     </Window.Resources>
     <Grid DataContext="{DynamicResource ViewModel}">
         <Menu x:Name="menu" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="517">
