@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 //using CodeEditor.Interfaces;
 //using CodeEditor.Plugins;
 
 namespace CodeEditor.Plugins {
-
-    class SamplePlugin : IPlugin {
+    internal class SamplePlugin : IPlugin {
 
         public string Name {
             get {
@@ -20,7 +14,7 @@ namespace CodeEditor.Plugins {
 
         public void Initialize()
         {
-            throw new NotImplementedException();
+        //    throw new NotImplementedException();
         }
 
         public void Do() {

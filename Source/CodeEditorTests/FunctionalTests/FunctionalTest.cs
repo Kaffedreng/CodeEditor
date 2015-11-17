@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.Entity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CodeEditor.Models;
 

@@ -3,12 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:vm="clr-namespace:CodeEditor.ViewModels"
-        Title="PluginManager" Height="300" Width="300">
+        Title="PluginManager" Height="307.563" Width="400" ResizeMode="NoResize">
     <Window.Resources>
         <vm:PluginManagerVm x:Key="PluginManagerVm"></vm:PluginManagerVm>
     </Window.Resources>
     <Grid DataContext="{DynamicResource PluginManagerVm}">
-        <ListView Margin="8" Height="auto" Width="auto" ItemsSource="{Binding plugins}">
+        <ListView Margin="10,10,10,39" Height="auto" Width="auto" ItemsSource="{Binding plugins}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}"></TextBlock>
@@ -16,9 +16,11 @@
             </ListView.ItemTemplate>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Plugins" Width="100"/>
+                    <GridViewColumn Header="Plugins" Width="auto"/>
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button x:Name="BtnRemove" Command="{Binding RemovePluginCommand}" Content="Remove selected plugin" HorizontalAlignment="Left" Margin="165,245,0,0" VerticalAlignment="Top" Width="150" RenderTransformOrigin="2.587,0.748"/>
+        <Button x:Name="BtnAdd" Command="{Binding AddNewPluginCommand}" Content="Add plugin" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top" Width="150" Height="20" RenderTransformOrigin="0.5,0.5"/>
     </Grid>
 </Window>
