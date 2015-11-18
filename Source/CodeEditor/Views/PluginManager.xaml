@@ -1,14 +1,14 @@
 ﻿<!-- Made by Jakob A. Nielsen -->
-    <Window x:Class="CodeEditor.Views.PluginManager"
+<Window x:Class="CodeEditor.Views.PluginManager"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:CodeEditor.ViewModels"
-        Title="PluginManager" Height="307.563" Width="400" ResizeMode="NoResize">
+        Title="PluginManager" Height="300" Width="400" ResizeMode="NoResize">
     <Window.Resources>
         <vm:PluginManagerVm x:Key="PluginManagerVm"></vm:PluginManagerVm>
     </Window.Resources>
     <Grid DataContext="{DynamicResource PluginManagerVm}">
-        <ListView Margin="10,10,10,39" Height="auto" Width="auto" ItemsSource="{Binding plugins}">
+        <ListView Margin="10,0,10,41" Height="auto" ItemsSource="{Binding plugins}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name, FallbackValue='No plugins have been added yet.'}"></TextBlock>
@@ -20,7 +20,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="BtnRemove" Command="{Binding RemovePluginCommand}" Content="Remove selected plugin" HorizontalAlignment="Left" Margin="165,245,0,0" VerticalAlignment="Top" Width="150" RenderTransformOrigin="2.587,0.748"/>
-        <Button x:Name="BtnAdd" Command="{Binding AddNewPluginCommand}" Content="Add plugin" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top" Width="150" Height="20" RenderTransformOrigin="0.5,0.5"/>
+        <Button x:Name="BtnRemove" Command="{Binding RemovePluginCommand}" Content="Remove selected plugin" HorizontalAlignment="Right" Margin="0,235,10,0" VerticalAlignment="Top" Width="185"/>
+        <Button x:Name="BtnAdd" Command="{Binding AddNewPluginCommand}" Content="Add plugin" HorizontalAlignment="Left" Margin="10,235,0,0" VerticalAlignment="Top" Width="184" Height="20"/>
     </Grid>
 </Window>

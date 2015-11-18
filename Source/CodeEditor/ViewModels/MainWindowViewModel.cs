@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
@@ -40,14 +41,6 @@ namespace CodeEditor.ViewModels {
             }
         }
 
-        public ICommand FindCommand
-        {
-            get
-            {
-                return new ActionCommand(o => FindText());
-            }
-        }
-
         #endregion
 
         /// <summary>
@@ -55,7 +48,6 @@ namespace CodeEditor.ViewModels {
         /// By Jakob A. Nielsen
         /// </summary>
         private string _TextFile;
-        private string MyTitleProperty = "CodeEditor";
 
         public string TextFile {
             get { return _TextFile; }
@@ -65,51 +57,15 @@ namespace CodeEditor.ViewModels {
                 NotifyPropertyChanged();
             }
         }
-
-        //private int _SelectionStart;
-
-        //public int SelectionStart
-        //{
-        //    get { return _SelectionStart; }
-        //    set
-        //    {
-        //        _SelectionStart = value;
-        //        NotifyPropertyChanged();
-        //    }
-        //}
-
-        public string Title
-        {
-            get { return MyTitleProperty; }
-            set
-            {
-                MyTitleProperty = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        // Using a DependencyProperty as the backing store for MyTitle.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty MyTitleProperty =
-        //    DependencyProperty.Register("MyTitle", typeof(string), typeof(MainWindow), new UIPropertyMetadata(null));
-
-
-        /// <summary>
-        /// User can find text in current file.
-        /// By Jakob A. Nielsen
-        /// </summary>
-        private void FindText()
-        {
-            int pose = TextFile.IndexOf("Hey");
-            //SelectionStart = pose;
-
-        }
-
+        
         /// <summary>
         /// Creates a new file as the user specifies.
         /// By Jakob A. Nielsen
         /// </summary>
         public void NewFile()
         {
+            TextFile = "";
+
             try
             {
                 SaveFileDialog dlg = new SaveFileDialog();
@@ -132,6 +88,8 @@ namespace CodeEditor.ViewModels {
         /// </summary>
         public void OpenFile()
         {
+            
+
             int iLines = 0;
 
             try
@@ -143,6 +101,8 @@ namespace CodeEditor.ViewModels {
                 dlg.ShowDialog();
 
                 string[] lines = File.ReadAllLines(dlg.FileName);
+
+                TextFile = "";
 
                 foreach (string line in lines)
                 {
@@ -164,7 +124,6 @@ namespace CodeEditor.ViewModels {
 
                     iLines++;
                 }
-                Title = dlg.FileName;
             }
             catch
             {

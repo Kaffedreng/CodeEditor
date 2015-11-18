@@ -25,7 +25,7 @@ namespace CodeEditor.ViewModels
         {
             get
             {
-                return new ActionCommand(o => Show());   
+                return new ActionCommand(o => Show());
             }
         }
 
@@ -78,11 +78,11 @@ namespace CodeEditor.ViewModels
 
                 Bootstrap.plugins.Remove(newDll.FileName);
 
-                MessageBox.Show("Plugin has been removed!");
+                MessageBox.Show("Plugin has been removed!", "A Plugin removed", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Cancelled", "Info Message", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
         /// <summary>
@@ -103,11 +103,11 @@ namespace CodeEditor.ViewModels
 
                 Bootstrap.Initialize();
 
-                MessageBox.Show("Plugin has been added!");
+                MessageBox.Show("Plugin has been added!", "A new Plugin added and initiated", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Cancelled", "Info Message", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
     }

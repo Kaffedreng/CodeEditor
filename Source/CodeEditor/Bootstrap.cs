@@ -10,15 +10,13 @@ namespace CodeEditor {
 
     public static class Bootstrap {
 
-        public static Dictionary<string, IPlugin> plugins;
+        public static Dictionary<string, IPlugin> plugins = new Dictionary<string, IPlugin>();
 
         public static void Initialize() {
 
             // Check for updates
 
             // Load Plug-Ins
-            plugins = new Dictionary<string, IPlugin>();
-
             ICollection<IPlugin> loadedPlugins = PluginLoader<IPlugin>.LoadPlugins("Plugins");
             if (loadedPlugins != null)
             {
@@ -27,7 +25,7 @@ namespace CodeEditor {
                     plugins.Add(item.Name, item);
                 }
 
-               // Initialize Plug-Ins
+                // Initialize Plug-Ins
                 foreach (var item in plugins)
                 {
                     IPlugin plugin = item.Value;
@@ -40,6 +38,5 @@ namespace CodeEditor {
                 MessageBox.Show("No plugins was found.");
             }
         }
-
     }
 }

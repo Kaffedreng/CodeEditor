@@ -6,26 +6,23 @@
         xmlns:viewModels="clr-namespace:CodeEditor.ViewModels"
         DataContext="{DynamicResource MainVM}"
         mc:Ignorable="d"
-        Title="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Height="350" Width="525">
+        Title="CodeEditor" Height="350" Width="525">
     <Window.Resources>
         <viewModels:PluginManagerVm x:Key="ViewModel"></viewModels:PluginManagerVm>
         <viewModels:MainWindowViewModel x:Key="MainVM"></viewModels:MainWindowViewModel>
     </Window.Resources>
     <Grid DataContext="{DynamicResource MainVM}">
-        <Menu x:Name="menu" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="auto">
+        <Menu x:Name="menu" Height="24" VerticalAlignment="Top" Width="auto">
             <MenuItem Header="File" Margin="0" VerticalAlignment="Center" Height="20">
                 <MenuItem Header="New file" Command="{Binding NewCommand}"></MenuItem>
                 <MenuItem Header="Open file" Command="{Binding OpenCommand}"></MenuItem>
                 <MenuItem Header="Save file" Command="{Binding SaveCommand}"></MenuItem>
                 <MenuItem Header="Exit" Command="{Binding CloseMainWindowCommand}"></MenuItem>
             </MenuItem>
-            <MenuItem Header="Edit">
-                <MenuItem Header="Find" Command="{Binding }"></MenuItem>
-            </MenuItem>
-            <MenuItem DataContext="{DynamicResource ViewModel}" Header="PluginManager" Command="{Binding OpenPluginManagerCommand}" Margin="0" VerticalAlignment="Center" Height="20" />
+            <MenuItem DataContext="{DynamicResource ViewModel}" Header="PluginManager" Command="{Binding OpenPluginManagerCommand}" Margin="0" VerticalAlignment="Center" Height="20" BorderThickness="1" />
         </Menu>
         <DockPanel Margin="0, 20, 0, 0">
-            <TextBox Text="{Binding TextFile, UpdateSourceTrigger=PropertyChanged}" FontFamily="Consolas" FontSize="11" AcceptsReturn="True" AcceptsTab="True" IsUndoEnabled="False" TextWrapping="Wrap" BorderThickness="1" BorderBrush="#FF0C0C0C"/>
+            <TextBox Text="{Binding TextFile, UpdateSourceTrigger=PropertyChanged}" FontFamily="Consolas" FontSize="11" AcceptsReturn="True" AcceptsTab="True" IsUndoEnabled="False" TextWrapping="Wrap" BorderThickness="0,0,0,1" BorderBrush="#FF0C0C0C" ForceCursor="True"/>
         </DockPanel>
     </Grid>
 </Window>
