@@ -7,6 +7,9 @@ using System.Windows.Input;
 
 namespace CodeEditor.ViewModels {
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class ActionCommand : ICommand {
 
         private readonly Action<Object> action;
