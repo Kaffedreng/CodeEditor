@@ -3,18 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CodeEditor.Views"
         xmlns:viewModels="clr-namespace:CodeEditor.ViewModels"
-        xmlns:vm="clr-namespace:CodeEditor.ViewModels"
         mc:Ignorable="d"
         Title="Code Editor" Height="350" Width="525">
     <Window.Resources>
         <viewModels:PluginManagerVm x:Key="ViewModel"></viewModels:PluginManagerVm>
+        <viewModels:MainWindowViewModel x:Key="MainVM"></viewModels:MainWindowViewModel>
     </Window.Resources>
-    <Grid DataContext="{DynamicResource ViewModel}">
+    <Grid DataContext="{DynamicResource MainVM}">
         <Menu x:Name="menu" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="517">
-            <MenuItem Header="File" Margin="0" VerticalAlignment="Center" Height="20"/>
-            <MenuItem Header="PluginManager" Command="{Binding UpdateCommand}" Margin="0" VerticalAlignment="Center" Height="20" />
+            <MenuItem Header="File" Margin="0" VerticalAlignment="Center" Height="20">
+                <MenuItem Header="New file" Command="{Binding NewCommand}"></MenuItem>
+                <MenuItem Header="Open file" Command="{Binding OpenCommand}"></MenuItem>
+                <MenuItem Header="Save file" Command="{Binding SaveCommand}"></MenuItem>
+                <MenuItem Header="Exit" Command="{Binding CloseMainWindowCommand}"></MenuItem>
+            </MenuItem>
+            <MenuItem DataContext="{DynamicResource ViewModel}" Header="PluginManager" Command="{Binding OpenPluginManagerCommand, FallbackValue='No plugins have been added yet.'}" Margin="0" VerticalAlignment="Center" Height="20" />
         </Menu>
         <DockPanel Margin="0, 20, 0, 0">
             <TextBox Text="{Binding TextBlock, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" FontFamily="Consolas" FontSize="11" AcceptsReturn="True" AcceptsTab="True" IsUndoEnabled="False" TextWrapping="Wrap" BorderThickness="1" BorderBrush="#FF0C0C0C" />

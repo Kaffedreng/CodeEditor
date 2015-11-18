@@ -31,6 +31,7 @@ namespace CodeEditor {
                 foreach (var item in plugins)
                 {
                     IPlugin plugin = item.Value;
+                    //plugin.Initialize();
                     plugin.Do();
                 }
             }

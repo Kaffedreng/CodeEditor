@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
+using System.Windows.Input;
+using CodeEditor.Views;
+using Microsoft.Win32;
 
 namespace CodeEditor.ViewModels {
 
@@ -18,56 +18,122 @@ namespace CodeEditor.ViewModels {
         {
         }
 
+        #region Members of ICommand - Commands for functionality on the MainWindow
+        public ICommand CloseMainWindowCommand
+        {
+            get
+            {
+                return new ActionCommand(o => CloseMainWindow());
+            }
+        }
+
+        public ICommand SaveCommand
+        {
+            get
+            {
+                return new ActionCommand(o => SaveFile());
+            }
+        }
+
+        public ICommand OpenCommand
+        {
+            get
+            {
+                return new ActionCommand(o => OpenFile());
+            }
+            //set { text = value; }
+        }
+        public ICommand NewCommand
+        {
+            get
+            {
+                return new ActionCommand(o => NewFile());
+            }
+        }
+        #endregion
+
+        public void NewFile()
+        {
+
+        }
+
+        public void OpenFile()
+        {
+            string distPath = Environment.CurrentDirectory + @"\Plugins\";
+
+            try
+            {
+                OpenFileDialog newDll = new OpenFileDialog();
+                newDll.Filter = "Text file (*.txt)|*.txt";
+                newDll.FilterIndex = 1;
+                newDll.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        public void SaveFile()
+        {
+
+        }
+
+        public void CloseMainWindow()
+        {
+            Application.Current.Shutdown();
+        }
+
         //private readonly IEventAggregator eventAggregator = new EventAggregator();
 
-            /// <summary>
-            /// Main constructor that creates a new instance of save, open and new command.
-            /// </summary>
-            //public EditorViewModel() {
-            //    //var logProperties = new NameValueCollection();
-            //    //logProperties["level"] = "ALL";
-            //    //LogManager.Adapter = new EventAggregatorOutFactoryAdapter(this.eventAggregator, logProperties);
+        /// <summary>
+        /// Main constructor that creates a new instance of save, open and new command.
+        /// </summary>
+        //public EditorViewModel() {
+        //    //var logProperties = new NameValueCollection();
+        //    //logProperties["level"] = "ALL";
+        //    //LogManager.Adapter = new EventAggregatorOutFactoryAdapter(this.eventAggregator, logProperties);
 
-            //    var pluginFolder =
-            //        FileSystem.Current.LocalStorage.CreateFolderAsync(
-            //            AppDomain.CurrentDomain.BaseDirectory + @"Plugins",
-            //            CreationCollisionOption.OpenIfExists);
+        //    var pluginFolder =
+        //        FileSystem.Current.LocalStorage.CreateFolderAsync(
+        //            AppDomain.CurrentDomain.BaseDirectory + @"Plugins",
+        //            CreationCollisionOption.OpenIfExists);
 
-            //    var logFolder =
-            //        FileSystem.Current.LocalStorage.CreateFolderAsync(
-            //            AppDomain.CurrentDomain.BaseDirectory + @"Logs",
-            //            CreationCollisionOption.OpenIfExists);
+        //    var logFolder =
+        //        FileSystem.Current.LocalStorage.CreateFolderAsync(
+        //            AppDomain.CurrentDomain.BaseDirectory + @"Logs",
+        //            CreationCollisionOption.OpenIfExists);
 
-            //    this.bootstrap = new SimpleBootstrap(".dll", eventAggregator);
-            //    this.SaveCommand = new RelayCommand(this.SaveFile);
-            //    this.OpenCommand = new RelayCommand(this.OpenFile);
-            //    this.NewCommand = new RelayCommand(this.NewFile);
+        //    this.bootstrap = new SimpleBootstrap(".dll", eventAggregator);
+        //    this.SaveCommand = new RelayCommand(this.SaveFile);
+        //    this.OpenCommand = new RelayCommand(this.OpenFile);
+        //    this.NewCommand = new RelayCommand(this.NewFile);
 
-            //    eventAggregator.GetEvent<FolderOpenedEvent>().Publish(pluginFolder.Result);
-            //    eventAggregator.GetEvent<FolderOpenedEvent>().Publish(logFolder.Result);
-            //}
+        //    eventAggregator.GetEvent<FolderOpenedEvent>().Publish(pluginFolder.Result);
+        //    eventAggregator.GetEvent<FolderOpenedEvent>().Publish(logFolder.Result);
+        //}
 
-        public
-            ActionCommand
-            OpenCommand
-            {
-                get;
-                set;
-            }
-        public
-            ActionCommand
-            SaveCommand
-            {
-                get;
-                set;
-            }
-        public
-            ActionCommand
-            NewCommand
-            {
-                get;
-                set;
-            }
+        //public
+        //    ActionCommand
+        //    OpenCommand
+        //    {
+        //        get;
+        //        set;
+        //    }
+        //public
+        //    ActionCommand
+        //    SaveCommand
+        //    {
+        //        get;
+        //        set;
+        //    }
+        //public
+        //    ActionCommand
+        //    NewCommand
+        //    {
+        //        get;
+        //        set;
+        //    }
 
             /// <summary>
             /// Gets and sets the encoding used to handle strings
