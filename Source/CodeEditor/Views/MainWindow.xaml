@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:CodeEditor.ViewModels"
         mc:Ignorable="d"
-        Title="Code Editor" Height="350" Width="525">
+        Title="CodeEditor" Height="350" Width="525">
     <Window.Resources>
         <viewModels:PluginManagerVm x:Key="ViewModel"></viewModels:PluginManagerVm>
         <viewModels:MainWindowViewModel x:Key="MainVM"></viewModels:MainWindowViewModel>
@@ -18,10 +18,10 @@
                 <MenuItem Header="Save file" Command="{Binding SaveCommand}"></MenuItem>
                 <MenuItem Header="Exit" Command="{Binding CloseMainWindowCommand}"></MenuItem>
             </MenuItem>
-            <MenuItem DataContext="{DynamicResource ViewModel}" Header="PluginManager" Command="{Binding OpenPluginManagerCommand, FallbackValue='No plugins have been added yet.'}" Margin="0" VerticalAlignment="Center" Height="20" />
+            <MenuItem DataContext="{DynamicResource ViewModel}" Header="PluginManager" Command="{Binding OpenPluginManagerCommand}" Margin="0" VerticalAlignment="Center" Height="20" />
         </Menu>
         <DockPanel Margin="0, 20, 0, 0">
-            <TextBox Text="{Binding TextBlock, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" FontFamily="Consolas" FontSize="11" AcceptsReturn="True" AcceptsTab="True" IsUndoEnabled="False" TextWrapping="Wrap" BorderThickness="1" BorderBrush="#FF0C0C0C" />
+            <TextBox Text="{Binding TextFile, UpdateSourceTrigger=PropertyChanged}" FontFamily="Consolas" FontSize="11" AcceptsReturn="True" AcceptsTab="True" IsUndoEnabled="False" TextWrapping="Wrap" BorderThickness="1" BorderBrush="#FF0C0C0C"/>
         </DockPanel>
     </Grid>
 </Window>

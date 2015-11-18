@@ -11,7 +11,7 @@
         <ListView Margin="10,10,10,39" Height="auto" Width="auto" ItemsSource="{Binding plugins}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}"></TextBlock>
+                    <TextBlock Text="{Binding Name, FallbackValue='No plugins have been added yet.'}"></TextBlock>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.View>
