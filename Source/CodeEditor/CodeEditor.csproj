@@ -59,6 +59,7 @@
     <Compile Include="SyntaxHighlighting\InlineExtension.cs" />
     <Compile Include="SyntaxHighlighting\ParagraphExtension.cs" />
     <Compile Include="SyntaxHighlighting\BaseSyntaxProcessor.cs" />
+    <Compile Include="SyntaxHighlighting\SQLSyntaxProcessor.cs" />
     <Compile Include="ViewModels\PluginInfo.cs" />
     <Compile Include="ViewModels\PluginManagerVM.cs" />
     <Compile Include="Views\PluginManager.xaml.cs">
