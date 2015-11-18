@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\ActionCommand.cs" />
     <Compile Include="SyntaxHighlighting\ContentType.cs" />
     <Compile Include="SyntaxHighlighting\InlineExtension.cs" />
     <Compile Include="SyntaxHighlighting\ParagraphExtension.cs" />
@@ -65,7 +66,6 @@
     <Compile Include="Views\PluginManager.xaml.cs">
       <DependentUpon>PluginManager.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ActionCommand.cs" />
     <Page Include="Views\PluginManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
