@@ -7,7 +7,7 @@ namespace CodeEditor.Plugins.Test {
 
         public void Initialize()
         {
-        //    throw new NotImplementedException();
+
         }
 
         public void Do() {
