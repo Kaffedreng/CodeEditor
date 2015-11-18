@@ -1,25 +1,13 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.IO;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Input;
-using CodeEditor.Plugins;
-using CodeEditor.Views;
 using Microsoft.Win32;
 
 namespace CodeEditor.ViewModels {
 
     class MainWindowViewModel : ViewModel
     {
-
-        //private readonly IBootstrap bootstrap;
-        //private Encoding encoding;
-        public MainWindowViewModel()
-        {
-        }
-
         #region Members of ICommand - Commands for functionality on the MainWindow
         public ICommand CloseMainWindowCommand
         {
@@ -51,9 +39,23 @@ namespace CodeEditor.ViewModels {
                 return new ActionCommand(o => NewFile());
             }
         }
+
+        public ICommand FindCommand
+        {
+            get
+            {
+                return new ActionCommand(o => FindText());
+            }
+        }
+
         #endregion
 
+        /// <summary>
+        /// Gets or sets the current textfile.
+        /// By Jakob A. Nielsen
+        /// </summary>
         private string _TextFile;
+        private string MyTitleProperty = "CodeEditor";
 
         public string TextFile {
             get { return _TextFile; }
@@ -64,19 +66,69 @@ namespace CodeEditor.ViewModels {
             }
         }
 
+        //private int _SelectionStart;
+
+        //public int SelectionStart
+        //{
+        //    get { return _SelectionStart; }
+        //    set
+        //    {
+        //        _SelectionStart = value;
+        //        NotifyPropertyChanged();
+        //    }
+        //}
+
+        public string Title
+        {
+            get { return MyTitleProperty; }
+            set
+            {
+                MyTitleProperty = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        // Using a DependencyProperty as the backing store for MyTitle.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty MyTitleProperty =
+        //    DependencyProperty.Register("MyTitle", typeof(string), typeof(MainWindow), new UIPropertyMetadata(null));
+
+
+        /// <summary>
+        /// User can find text in current file.
+        /// By Jakob A. Nielsen
+        /// </summary>
+        private void FindText()
+        {
+            int pose = TextFile.IndexOf("Hey");
+            //SelectionStart = pose;
+
+        }
+
+        /// <summary>
+        /// Creates a new file as the user specifies.
+        /// By Jakob A. Nielsen
+        /// </summary>
         public void NewFile()
         {
-            SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Title = "Save file...";
-            dlg.Filter = "Text file (*.txt)|*.txt";
-            dlg.FilterIndex = 1;
-            dlg.ShowDialog();
+            try
+            {
+                SaveFileDialog dlg = new SaveFileDialog();
+                dlg.Title = "Create new file...";
+                dlg.Filter = "Text file (*.txt)|*.txt";
+                dlg.FilterIndex = 1;
+                dlg.ShowDialog();
 
-            File.WriteAllText(dlg.FileName, "");
+                File.WriteAllText(dlg.FileName, "");
+            }
+            catch
+            {
+                MessageBox.Show("Cancelled", "Info Message", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         /// <summary>
         /// Opens a file and display it in the textbox.
+        /// By Jakob A. Nielsen
         /// </summary>
         public void OpenFile()
         {
@@ -112,10 +164,11 @@ namespace CodeEditor.ViewModels {
 
                     iLines++;
                 }
+                Title = dlg.FileName;
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Cancelled", "Info Message", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -125,26 +178,33 @@ namespace CodeEditor.ViewModels {
         /// </summary>
         public void SaveFile()
         {
-            SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Title = "Save file...";
-            dlg.Filter = "Text file (*.txt)|*.txt";
-            dlg.FilterIndex = 1;
-            dlg.ShowDialog();
-
-            if (!String.IsNullOrEmpty(TextFile))
+            try
             {
-                foreach (string _Textline in TextFile.Split('\n'))
-                {
-                    string Textline = _Textline.TrimEnd('\r');
+                SaveFileDialog dlg = new SaveFileDialog();
+                dlg.Title = "Save file...";
+                dlg.Filter = "Text file (*.txt)|*.txt";
+                dlg.FilterIndex = 1;
+                dlg.ShowDialog();
 
-                    File.WriteAllText(dlg.FileName, _TextFile);
+                if (!String.IsNullOrEmpty(TextFile))
+                {
+                    foreach (string _Textline in TextFile.Split('\n'))
+                    {
+                        string Textline = _Textline.TrimEnd('\r');
+
+                        File.WriteAllText(dlg.FileName, _TextFile);
+                    }
                 }
+            }
+            catch
+            {
+                MessageBox.Show("Cancelled", "Info Message", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
         /// <summary>
         /// Closes the application.
-        /// By Jakob
+        /// By Jakob A. Nielsen
         /// </summary>
         public void CloseMainWindow()
         {

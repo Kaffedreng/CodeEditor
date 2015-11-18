@@ -4,19 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:CodeEditor.ViewModels"
+        DataContext="{DynamicResource MainVM}"
         mc:Ignorable="d"
-        Title="CodeEditor" Height="350" Width="525">
+        Title="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Height="350" Width="525">
     <Window.Resources>
         <viewModels:PluginManagerVm x:Key="ViewModel"></viewModels:PluginManagerVm>
         <viewModels:MainWindowViewModel x:Key="MainVM"></viewModels:MainWindowViewModel>
     </Window.Resources>
     <Grid DataContext="{DynamicResource MainVM}">
-        <Menu x:Name="menu" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="517">
+        <Menu x:Name="menu" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="auto">
             <MenuItem Header="File" Margin="0" VerticalAlignment="Center" Height="20">
                 <MenuItem Header="New file" Command="{Binding NewCommand}"></MenuItem>
                 <MenuItem Header="Open file" Command="{Binding OpenCommand}"></MenuItem>
                 <MenuItem Header="Save file" Command="{Binding SaveCommand}"></MenuItem>
                 <MenuItem Header="Exit" Command="{Binding CloseMainWindowCommand}"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem Header="Find" Command="{Binding }"></MenuItem>
             </MenuItem>
             <MenuItem DataContext="{DynamicResource ViewModel}" Header="PluginManager" Command="{Binding OpenPluginManagerCommand}" Margin="0" VerticalAlignment="Center" Height="20" />
         </Menu>
