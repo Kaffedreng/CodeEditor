@@ -21,6 +21,6 @@
             </ListView.View>
         </ListView>
         <Button x:Name="BtnRemove" Command="{Binding RemovePluginCommand}" Content="Remove selected plugin" HorizontalAlignment="Right" Margin="0,235,10,0" VerticalAlignment="Top" Width="185"/>
-        <Button x:Name="BtnAdd" Command="{Binding AddNewPluginCommand}" Content="Add plugin" HorizontalAlignment="Left" Margin="10,235,0,0" VerticalAlignment="Top" Width="184" Height="20"/>
+        <Button x:Name="BtnAdd" Command="{Binding AddNewPluginCommand}" Content="Add plugin" HorizontalAlignment="Left" Margin="10,235,0,0" VerticalAlignment="Top" Width="184" Height="22"/>
     </Grid>
 </Window>
