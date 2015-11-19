@@ -56,7 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="SyntaxHighlighting\ContentType.cs" />
-    <Compile Include="ViewModels\PluginInfo.cs" />
+    <Compile Include="SyntaxHighlighting\HTMLSyntaxProcessor.cs" />
     <Compile Include="ViewModels\PluginManagerVM.cs" />
     <Compile Include="Views\PluginManager.xaml.cs">
       <DependentUpon>PluginManager.xaml</DependentUpon>

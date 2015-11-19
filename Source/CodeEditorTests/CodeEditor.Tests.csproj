@@ -39,8 +39,12 @@
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -60,8 +64,8 @@
     <Compile Include="FunctionalTests\FunctionalTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTests\ActionCommandTests.cs" />
-    <Compile Include="UnitTests\BusinessContextTests.cs" />
-    <Compile Include="UnitTests\CustomerViewModelTests.cs" />
+    <Compile Include="UnitTests\MainWindowVMTest.cs" />
+    <Compile Include="UnitTests\PluginManagerVMTests.cs" />
     <Compile Include="UnitTests\ObservableObjectTests.cs" />
     <Compile Include="UnitTests\ViewModelTests.cs" />
   </ItemGroup>

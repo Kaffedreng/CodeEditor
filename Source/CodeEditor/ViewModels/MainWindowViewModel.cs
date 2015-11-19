@@ -1,13 +1,11 @@
 ﻿using System;
-using System.CodeDom;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
 
 namespace CodeEditor.ViewModels {
-
-    class MainWindowViewModel : ViewModel
+    public class MainWindowViewModel : ViewModel
     {
         #region Members of ICommand - Commands for functionality on the MainWindow
         public ICommand CloseMainWindowCommand
@@ -88,8 +86,6 @@ namespace CodeEditor.ViewModels {
         /// </summary>
         public void OpenFile()
         {
-            
-
             int iLines = 0;
 
             try

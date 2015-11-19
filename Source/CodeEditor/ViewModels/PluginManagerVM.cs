@@ -16,8 +16,13 @@ namespace CodeEditor.ViewModels
         /// <summary>
         /// An observable collection for the listview in the plugin manager.
         /// </summary>
-        public ObservableCollection<IPlugin> plugins => new ObservableCollection<IPlugin>(Bootstrap.plugins.Values);
-
+        public ObservableCollection<IPlugin> plugins
+        {
+            get
+            {
+                return new ObservableCollection<IPlugin>(Bootstrap.plugins.Values);
+            }
+        }
         /// <summary>
         /// Gets the Open plugin manager window command.
         /// </summary>
