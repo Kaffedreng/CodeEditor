@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Code Editor" Height="350" Width="525">
     <Window.Resources>
-        <viewModels:PluginManagerVm x:Key="ViewModel"></viewModels:PluginManagerVm>
-        <viewModels:MainWindowViewModel x:Key="MainVM"></viewModels:MainWindowViewModel>
+        <!--<viewModels:PluginManagerVm x:Key="ViewModel"></viewModels:PluginManagerVm>-->
+        <!--<viewModels:MainWindowViewModel x:Key="MainVM"></viewModels:MainWindowViewModel>-->
     </Window.Resources>
     
    <!-- Main Grid -->
@@ -24,9 +24,8 @@
             </MenuItem>
             <MenuItem DataContext="{DynamicResource ViewModel}" Header="PluginManager" Command="{Binding OpenPluginManagerCommand, FallbackValue='No plugins have been added yet.'}" Margin="0" VerticalAlignment="Center" Height="20" />
         </Menu>
-        <TextBox Text="{Binding TextFile}" Margin="0,20,0,0"></TextBox>
-        <!--
-        Text Editor
+        
+        <!-- Text Editor -->
         <DockPanel Margin="0, 20, 0, 0">
             <RichTextBox x:Name="EditorTextBox" TextChanged="EditorTextBox_TextChanged" IsDocumentEnabled="True" AcceptsReturn="True" AcceptsTab="True">
                 <RichTextBox.Resources>
@@ -37,6 +36,6 @@
                 <FlowDocument FontFamily="Consolas" FontSize="11" IsColumnWidthFlexible="False" LineHeight="1" />
             </RichTextBox>
         </DockPanel>
-        -->
+
     </Grid>
 </Window>
