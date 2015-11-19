@@ -80,9 +80,6 @@ namespace CodeEditor.SyntaxHighlighting {
                     break;
 
                 default:
-                    // Plain text
-                    // TODO: Red color is used for testing only
-                    inline.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
                     break;
             }
 

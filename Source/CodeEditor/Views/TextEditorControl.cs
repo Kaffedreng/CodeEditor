@@ -27,9 +27,8 @@ namespace CodeEditor.Views {
         public bool DisableAddingWhiteSpacesOnEnter { get; set; }
 
         public TextEditorControl() {
-            Console.WriteLine("TextEditorControl Constructor");
 
-            // TODO: Determine Syntax
+            // TODO: Determine Syntax from file extension/contents
             this.syntaxProcessor = new SQLSyntaxProcessor();
 
             var style = new Style(typeof(Paragraph));
@@ -112,9 +111,8 @@ namespace CodeEditor.Views {
                 return;
             }
 
-            var changedParagraphs = new HashSet<Paragraph>();
-
             // Prepare a list of paragraphs that need to be changed
+            var changedParagraphs = new HashSet<Paragraph>();
             foreach (var change in e.Changes) {
 
                 if (change.Offset < (change.Offset + change.AddedLength)) {
@@ -191,18 +189,17 @@ namespace CodeEditor.Views {
             cursorNeighbouringElement = null;
 
             for (var i = 0; i < list.Count; i++) {
-                var current = list[i];
+                var word = list[i];
 
-                // if this is the caret
-                if (current == null) {
+                // If this is the caret
+                if (word == null) {
 
-                    // if the caret is in the first character - add an empty element to serve as pointer to the caret
+                    // If the caret is the first character - add an empty element to serve as pointer to the caret
                     if (i == 0) {
                         var run = new Run("");
                         inlines.AddLast(run);
                     }
-
-                    // if the caret is not at the very beginning of the row make sure to add a pointer to it
+                    // If the caret is not at the very beginning of the row make sure to add a pointer to it
                     else {
                         if (stringBuilder.Length > 0) {
                             var run = new Run(stringBuilder.ToString());
@@ -216,9 +213,9 @@ namespace CodeEditor.Views {
                     continue;
                 }
 
-                // check if upcomming is the caret pointer (null value) and it is not at the end
+                // Check if upcoming is the caret pointer (null value) and it is not at the end
                 if (i < (list.Count - 2) && list[i + 1] == null) {
-                    wordAroundCaretContentType = syntaxProcessor.ContentTypeForWord(current + list[i + 2]);
+                    wordAroundCaretContentType = syntaxProcessor.ContentTypeForWord(word + list[i + 2]);
 
                     if (wordAroundCaretContentType > 0) {
 
@@ -227,25 +224,25 @@ namespace CodeEditor.Views {
                             stringBuilder = new StringBuilder();
                         }
 
-                        inlines.AddLast(syntaxProcessor.FormatInlineWithContentType(new Run(current), wordAroundCaretContentType));
+                        inlines.AddLast(syntaxProcessor.FormatInlineWithContentType(new Run(word), wordAroundCaretContentType));
                         continue;
                     }
                 }
 
-                var id = wordAroundCaretContentType > 0 ? wordAroundCaretContentType : syntaxProcessor.ContentTypeForWord(current);
+                // Get content type of word
+                var contentType = syntaxProcessor.ContentTypeForWord(word);
 
-                if (id > 0) {
-                    wordAroundCaretContentType = ContentType.PlainText;
-
+                if (contentType != ContentType.PlainText) {
+                    // Add color to the word
                     if (stringBuilder.Length > 0) {
                         inlines.AddLast(new Run(stringBuilder.ToString()));
                         stringBuilder = new StringBuilder();
                     }
 
-                    inlines.AddLast(syntaxProcessor.FormatInlineWithContentType(new Run(current), id));
+                    inlines.AddLast(syntaxProcessor.FormatInlineWithContentType(new Run(word), contentType));
                 }
                 else {
-                    stringBuilder.Append(current);
+                    stringBuilder.Append(word);
                 }
             }
 
@@ -284,25 +281,27 @@ namespace CodeEditor.Views {
         /// <returns></returns>
         private List<string> ExtractListOfWords(RichTextBox textBox, Paragraph paragraph) {
 
+            // Check if caret position is within the word
             var caretIsWithin = (textBox.CaretPosition != null &&
                                  textBox.CaretPosition.CompareTo(paragraph.ContentStart) >= 0 &&
                                  textBox.CaretPosition.CompareTo(paragraph.ContentEnd) <= 0);
 
             var list = new List<string>();
 
-            // TODO: If caret is within the paragraph, ...
+            // If caret is within the paragraph, we need to break it up into Inline objects and format the line
             if (caretIsWithin) {
+
                 var beforeText = paragraph.GetTextBefore(textBox.CaretPosition);
                 var afterText = paragraph.GetTextAfter(textBox.CaretPosition);
 
-                // enter key was pressed
+                // If there's no text on either side of the caret, we're on an empty line
                 if (beforeText == "" && afterText == "") {
 
                     if (this.DisableAddingWhiteSpacesOnEnter) {
                         return null;
                     }
 
-                    // add white space to the new line - same as the previous line
+                    // Add white space to the new line - same as the previous line
                     var prev = paragraph.PreviousBlock as Paragraph;
                     if (prev != null) {
                         var previousLine = prev.GetText();
@@ -329,12 +328,12 @@ namespace CodeEditor.Views {
                     }
                 }
 
-                // else
-
+                // If theres text before or after the caret, split the words and add them to the list
                 if (beforeText != "") {
                     list.AddRange(this.syntaxProcessor.SplitWordsRegex.Split(beforeText));
                 }
 
+                // Add null representing the caret
                 list.Add(null);
 
                 if (afterText != "") {
@@ -342,7 +341,8 @@ namespace CodeEditor.Views {
                 }
             }
             else {
-                // 
+                // If caret is not in the paragraph, just add it as-is.
+                // It would already be formatted.
                 var text = paragraph.GetText();
                 var array = this.syntaxProcessor.SplitWordsRegex.Split(text);
                 list.AddRange(array);
