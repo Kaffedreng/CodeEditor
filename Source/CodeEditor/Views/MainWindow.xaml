@@ -4,24 +4,28 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:CodeEditor.ViewModels"
-        DataContext="{DynamicResource MainVM}"
         mc:Ignorable="d"
-        d:DataContext="d:DesignInstance viewModels:MainWindowViewModel}"
         Title="Code Editor" Height="350" Width="525">
-    <!--<Window.Resources>
+    <Window.Resources>
         <viewModels:PluginManagerVm x:Key="ViewModel"></viewModels:PluginManagerVm>
         <viewModels:MainWindowViewModel x:Key="MainVM"></viewModels:MainWindowViewModel>
     </Window.Resources>
+    
+   <!-- Main Grid -->
     <Grid DataContext="{DynamicResource MainVM}">
-        <Menu x:Name="menu" Height="24" VerticalAlignment="Top" Width="auto">
+        
+        <!-- Main Menu -->
+        <Menu x:Name="menu" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="517">
             <MenuItem Header="File" Margin="0" VerticalAlignment="Center" Height="20">
                 <MenuItem Header="New file" Command="{Binding NewCommand}"></MenuItem>
                 <MenuItem Header="Open file" Command="{Binding OpenCommand}"></MenuItem>
                 <MenuItem Header="Save file" Command="{Binding SaveCommand}"></MenuItem>
                 <MenuItem Header="Exit" Command="{Binding CloseMainWindowCommand}"></MenuItem>
             </MenuItem>
-            <MenuItem DataContext="{DynamicResource ViewModel}" Header="PluginManager" Command="{Binding OpenPluginManagerCommand}" Margin="0" VerticalAlignment="Center" Height="20" BorderThickness="1" />
+            <MenuItem DataContext="{DynamicResource ViewModel}" Header="PluginManager" Command="{Binding OpenPluginManagerCommand, FallbackValue='No plugins have been added yet.'}" Margin="0" VerticalAlignment="Center" Height="20" />
         </Menu>
+
+        <!-- Text Editor -->
         <DockPanel Margin="0, 20, 0, 0">
             <RichTextBox x:Name="EditorTextBox" TextChanged="EditorTextBox_TextChanged" IsDocumentEnabled="True" AcceptsReturn="True" AcceptsTab="True">
                 <RichTextBox.Resources>
@@ -30,14 +34,9 @@
                     </Style>
                 </RichTextBox.Resources>
                 <FlowDocument FontFamily="Consolas" FontSize="11" IsColumnWidthFlexible="False" LineHeight="1">
-                    <Paragraph>SELECT
-   Name,
-   Description,
-   ISNULL(MoreInfo, 1)
-FROM Table1 t1
-INNER JOIN Table2 t2 ON t1.ID = t2.Table1ID</Paragraph>
                 </FlowDocument>
             </RichTextBox>
         </DockPanel>
+
     </Grid>
 </Window>

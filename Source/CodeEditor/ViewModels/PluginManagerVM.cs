@@ -11,6 +11,9 @@ using System.Windows;
 
 namespace CodeEditor.ViewModels
 {
+
+    using CodeEditor.Commands;
+
     public class PluginManagerVm
     {
         /// <summary>
