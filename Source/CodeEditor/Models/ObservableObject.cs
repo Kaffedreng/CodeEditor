@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace CodeEditor.ViewModels {
+namespace CodeEditor.Models {
 
     using System.ComponentModel;
 

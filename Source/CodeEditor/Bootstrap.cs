@@ -17,7 +17,7 @@ namespace CodeEditor {
             // Check for updates
 
             // Load Plug-Ins
-            ICollection<IPlugin> loadedPlugins = PluginLoader<IPlugin>.LoadPlugins("Plugins");
+            ICollection<IPlugin> loadedPlugins = PluginLoader<IPlugin>.LoadPlugins("\\Plugins");
             if (loadedPlugins != null)
             {
                 foreach (var item in loadedPlugins)
