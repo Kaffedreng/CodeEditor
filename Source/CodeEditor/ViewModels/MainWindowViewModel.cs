@@ -1,37 +1,27 @@
-﻿using System;
+using System;
 using System.CodeDom;
 using System.IO;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
+using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace CodeEditor.ViewModels {
 
-    class MainWindowViewModel : ViewModel
-    {
-        #region Members of ICommand - Commands for functionality on the MainWindow
-        public ICommand CloseMainWindowCommand
-        {
-            get
-            {
-                return new ActionCommand(o => CloseMainWindow());
-            }
-        }
+    using CodeEditor.Commands;
+    using CodeEditor.Views;
 
-        public ICommand SaveCommand
-        {
-            get
-            {
-                return new ActionCommand(o => SaveFile());
-            }
-        }
+    class MainWindowViewModel : ViewModel {
 
-        public ICommand OpenCommand
-        {
-            get
-            {
-                return new ActionCommand(o => OpenFile());
-            }
+        public MainWindowViewModel() {
+
+            Console.WriteLine("Loaded MainWindowViewModel");
         }
         public ICommand NewCommand
         {
@@ -41,133 +31,39 @@ namespace CodeEditor.ViewModels {
             }
         }
 
-        #endregion
-
         /// <summary>
-        /// Gets or sets the current textfile.
-        /// By Jakob A. Nielsen
+        /// Open file command.
         /// </summary>
-        private string _TextFile;
-
-        public string TextFile {
-            get { return _TextFile; }
-            set
-            {
-                _TextFile = value;
-                NotifyPropertyChanged();
-            }
-        }
-        
-        /// <summary>
-        /// Creates a new file as the user specifies.
-        /// By Jakob A. Nielsen
-        /// </summary>
-        public void NewFile()
-        {
-            TextFile = "";
-
-            try
-            {
-                SaveFileDialog dlg = new SaveFileDialog();
-                dlg.Title = "Create new file...";
-                dlg.Filter = "Text file (*.txt)|*.txt";
-                dlg.FilterIndex = 1;
-                dlg.ShowDialog();
-
-                File.WriteAllText(dlg.FileName, "");
-            }
-            catch
-            {
-                MessageBox.Show("Cancelled", "Info Message", MessageBoxButton.OK, MessageBoxImage.Warning);
+        public ActionCommand OpenFileCommand {
+            get {
+                return new ActionCommand(p => this.OpenFile());
             }
         }
 
-        /// <summary>
-        /// Opens a file and display it in the textbox.
-        /// By Jakob A. Nielsen
-        /// </summary>
-        public void OpenFile()
-        {
-            
+        private void OpenFile() {
 
-            int iLines = 0;
+            // Create OpenFileDialog 
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
 
-            try
-            {
-                OpenFileDialog dlg = new OpenFileDialog();
-                dlg.Title = "Open file...";
-                dlg.Filter = "Text file (*.txt)|*.txt";
-                dlg.FilterIndex = 1;
-                dlg.ShowDialog();
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dialog.ShowDialog();
 
-                string[] lines = File.ReadAllLines(dlg.FileName);
+            if (result == true) {
+                Console.WriteLine("Opened " + dialog.FileName);
 
-                TextFile = "";
+                // Load contents into editor
+                //string text = File.ReadAllText(dialog.FileName);
+                //EditorTextBox.Text = text;
 
-                foreach (string line in lines)
-                {
-                    if (line == "")
-                    {
-                        TextFile += "\n";
-                    }
-                    else
-                    {
-                        if (iLines == lines.Length - 1)
-                        {
-                            TextFile += line;
-                        }
-                        else
-                        {
-                            TextFile += line + "\n";
-                        }
-                    }
-
-                    iLines++;
-                }
+                //TextRange range;
+                //FileStream fileStream;
+                //if (File.Exists(dialog.FileName)) {
+                //    range = new TextRange(EditorTextBox.Document.ContentStart, EditorTextBox.Document.ContentEnd);
+                //    fileStream = new FileStream(dialog.FileName, FileMode.OpenOrCreate);
+                //    range.Load(fileStream, DataFormats.Text);
+                //    fileStream.Close();
+                //}
             }
-            catch
-            {
-                MessageBox.Show("Cancelled", "Info Message", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
-
-        /// <summary>
-        /// Saves the current text to file of own choice.
-        /// By JakobA. Nielsen
-        /// </summary>
-        public void SaveFile()
-        {
-            try
-            {
-                SaveFileDialog dlg = new SaveFileDialog();
-                dlg.Title = "Save file...";
-                dlg.Filter = "Text file (*.txt)|*.txt";
-                dlg.FilterIndex = 1;
-                dlg.ShowDialog();
-
-                if (!String.IsNullOrEmpty(TextFile))
-                {
-                    foreach (string _Textline in TextFile.Split('\n'))
-                    {
-                        string Textline = _Textline.TrimEnd('\r');
-
-                        File.WriteAllText(dlg.FileName, _TextFile);
-                    }
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Cancelled", "Info Message", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
-
-        /// <summary>
-        /// Closes the application.
-        /// By Jakob A. Nielsen
-        /// </summary>
-        public void CloseMainWindow()
-        {
-            Application.Current.Shutdown();
         }
 
         //private readonly IEventAggregator eventAggregator = new EventAggregator();
@@ -199,27 +95,11 @@ namespace CodeEditor.ViewModels {
         //    eventAggregator.GetEvent<FolderOpenedEvent>().Publish(logFolder.Result);
         //}
 
-        //public
-        //    ActionCommand
-        //    OpenCommand
-        //    {
-        //        get;
-        //        set;
-        //    }
-        //public
-        //    ActionCommand
-        //    SaveCommand
-        //    {
-        //        get;
-        //        set;
-        //    }
-        //public
-        //    ActionCommand
-        //    NewCommand
-        //    {
-        //        get;
-        //        set;
-        //    }
+        //public ActionCommand OpenCommand { get; set; }
+
+        //public ActionCommand SaveCommand { get; set; }
+
+        //public ActionCommand NewCommand { get; set; }
 
         /// <summary>
         /// Gets and sets the encoding used to handle strings
