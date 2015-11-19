@@ -1,8 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CodeEditor.ViewModels;
 
 namespace CodeEditorTests.UnitTests {
+
+    using CodeEditor.Commands;
 
     [TestClass]
     public class ActionCommandTests {

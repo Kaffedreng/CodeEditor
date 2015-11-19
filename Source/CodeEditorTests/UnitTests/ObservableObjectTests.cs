@@ -1,7 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CodeEditor.ViewModels;
 
 namespace CodeEditorTests.UnitTests {
+
+    using CodeEditor.Models;
 
     [TestClass]
     public class ObservableObjectTests {
