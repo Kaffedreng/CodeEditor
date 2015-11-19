@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace CodeEditor.SyntaxHighlighting {
 
+    /// <summary>
+    /// The ContentType-enum contains all available types of text content.
+    /// This is used to apply formatting colors, and allows different colors
+    /// for differente types of content.
+    /// </summary>
     public enum ContentType {
         PlainText,
         Comments,

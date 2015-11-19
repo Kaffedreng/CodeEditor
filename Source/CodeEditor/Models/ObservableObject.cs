@@ -4,7 +4,6 @@ namespace CodeEditor.Models {
 
     using System.ComponentModel;
 
-    // TODO: Document
     public class ObservableObject : INotifyPropertyChanged {
 
         /// <summary>

@@ -9,7 +9,7 @@ namespace CodeEditor.SyntaxHighlighting {
     using Interfaces;
 
     /// <summary>
-    /// The BaseSyntaxProcessor handles non-language specific keywords.
+    /// The BaseSyntaxProcessor handles non-language-specific keywords.
     /// All SyntaxProcessor-classes must subclass this class, and apply custom formatting if needed.
     /// </summary>
     public abstract class BaseSyntaxProcessor : ISyntaxProcessor {
@@ -56,6 +56,11 @@ namespace CodeEditor.SyntaxHighlighting {
         };
         #endregion
 
+        /// <summary>
+        /// Constructor.
+        /// If an instance of this class conforms to the ISyntaxProcessorCustomization-interface
+        /// the custom keywords, functions, etc. will be added to the default lists.
+        /// </summary>
         public BaseSyntaxProcessor() {
             if (this is ISyntaxProcessorCustomization) {
                 var customizedThis = (ISyntaxProcessorCustomization)this;
@@ -80,6 +85,13 @@ namespace CodeEditor.SyntaxHighlighting {
             }
         }
 
+        /// <summary>
+        /// Returns the content type for the specified word.
+        /// The Content type is found by looking through the lists.
+        /// If no match is found, default content type is Plain Text.
+        /// </summary>
+        /// <param name="word"></param>
+        /// <returns></returns>
         public ContentType ContentTypeForWord(string word) {
             // TODO: Implement for all contenttypes
             if (keywords.Contains(word)) {
@@ -93,6 +105,17 @@ namespace CodeEditor.SyntaxHighlighting {
             return ContentType.PlainText;
         }
 
+        /// <summary>
+        /// Apply formatting on an Inline.
+        /// This methods searches for the content type of the inline
+        /// by looking through the lists.
+        /// If a match is found, it will apply text formatting.
+        /// If the keyword has custom formatting applied, this is used over the default.
+        /// If no match is found, no formatting is applied.
+        /// </summary>
+        /// <param name="inline"></param>
+        /// <param name="contentType"></param>
+        /// <returns></returns>
         public Inline FormatInlineWithContentType(Inline inline, ContentType contentType) {
             
                 var customizedThis = (ISyntaxProcessorCustomization)this;

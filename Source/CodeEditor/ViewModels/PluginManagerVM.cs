@@ -9,30 +9,28 @@ using Microsoft.Win32;
 using System.IO;
 using System.Windows;
 
-namespace CodeEditor.ViewModels
-{
+namespace CodeEditor.ViewModels {
 
-    using CodeEditor.Commands;
+    using Commands;
 
-    public class PluginManagerVm
-    {
+    /// <summary>
+    /// The PluginManagerViewModel handles logic for the Plugin Manager view.
+    /// </summary>
+    public class PluginManagerVm {
+
         /// <summary>
         /// An observable collection for the listview in the plugin manager.
         /// </summary>
-        public ObservableCollection<IPlugin> plugins
-        {
-            get
-            {
+        public ObservableCollection<IPlugin> plugins {
+            get {
                 return new ObservableCollection<IPlugin>(Bootstrap.plugins.Values);
             }
         }
         /// <summary>
         /// Gets the Open plugin manager window command.
         /// </summary>
-        public ICommand OpenPluginManagerCommand
-        {
-            get
-            {
+        public ICommand OpenPluginManagerCommand {
+            get {
                 return new ActionCommand(o => Show());
             }
         }
@@ -40,10 +38,8 @@ namespace CodeEditor.ViewModels
         /// <summary>
         /// Gets the add plugin command.
         /// </summary>
-        public ICommand AddNewPluginCommand
-        {
-            get
-            {
+        public ICommand AddNewPluginCommand {
+            get {
                 return new ActionCommand(o => AddPlugin());
             }
         }
@@ -51,10 +47,8 @@ namespace CodeEditor.ViewModels
         /// <summary>
         /// Get the remove plugin command.
         /// </summary> 
-        public ICommand RemovePluginCommand
-        {
-            get
-            {
+        public ICommand RemovePluginCommand {
+            get {
                 return new ActionCommand(o => RemovePlugin());
             }
         }
@@ -62,46 +56,42 @@ namespace CodeEditor.ViewModels
         /// <summary>
         /// Open the plugin manager window.
         /// </summary>
-        public void Show()
-        {
+        public void Show() {
             PluginManager view = new PluginManager();
             view.ShowDialog();
         }
+
         /// <summary>
         /// User selects and removes a chosen plugin.
         /// </summary>
-        public void RemovePlugin()
-        {
+        public void RemovePlugin() {
             string distPath = Environment.CurrentDirectory + @"\Plugins\";
 
-            try
-            {
+            try {
                 OpenFileDialog newDll = new OpenFileDialog();
                 newDll.Filter = "Plugins (*.dll)|*.dll";
                 newDll.FilterIndex = 1;
                 newDll.InitialDirectory = Environment.CurrentDirectory + @"\Plugins\";
                 newDll.ShowDialog();
-                
+
                 File.Delete(newDll.FileName);
 
                 Bootstrap.plugins.Remove(newDll.FileName);
 
                 MessageBox.Show("Plugin has been removed!", "A Plugin removed", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch
-            {
+            catch {
                 MessageBox.Show("Cancelled", "Info Message", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
         /// <summary>
         /// User can add a plugin.
         /// </summary>
-        public void AddPlugin()
-        {
+        public void AddPlugin() {
             string distPath = Environment.CurrentDirectory + @"\Plugins\";
 
-            try
-            {
+            try {
                 OpenFileDialog newDll = new OpenFileDialog();
                 newDll.Filter = "Plugins (*.dll)|*.dll";
                 newDll.FilterIndex = 1;
@@ -113,8 +103,7 @@ namespace CodeEditor.ViewModels
 
                 MessageBox.Show("Plugin has been added!", "A new Plugin added and initiated", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch
-            {
+            catch {
                 MessageBox.Show("Cancelled", "Info Message", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }

@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Markup;
 
 namespace CodeEditor.Views {
 
-    using CodeEditor.Interfaces;
-    using CodeEditor.SyntaxHighlighting;
+    using Interfaces;
+    using SyntaxHighlighting;
 
+    /// <summary>
+    /// The TextEditorControl class is a subclass of UserControl.
+    /// It is used to provide support for syntax highlighting in a RichTextBox.
+    /// </summary>
     public class TextEditorControl : UserControl {
 
         private bool disableTextChangedEvent;
@@ -24,25 +22,18 @@ namespace CodeEditor.Views {
         // TODO: Register Syntax automatically
         private ISyntaxProcessor syntaxProcessor;
 
-        public bool DisableAddingWhiteSpacesOnEnter { get; set; }
-
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         public TextEditorControl() {
 
             // TODO: Determine Syntax from file extension/contents
             this.syntaxProcessor = new SQLSyntaxProcessor();
-
-            var style = new Style(typeof(Paragraph));
-            style.Setters.Add(new Setter(Block.MarginProperty, new Thickness(0)));
-            this.Resources.Add(typeof(Paragraph), style);
-        }
-
-        private string GetText(RichTextBox textBox) {
-            var range = new TextRange(textBox.Document.ContentStart, textBox.Document.ContentEnd);
-            return range.Text;
         }
 
         /// <summary>
-        /// 
+        /// Event Handler manually triggered when the text in the RichTextBox.
+        /// This method assembles a list of all the paragraphs that has changed since last change.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -85,6 +76,17 @@ namespace CodeEditor.Views {
             this.ReEvaluateParagraphs(textBox, changedParagraphs);
         }
 
+        /// <summary>
+        /// Helper function to get the contents of the RichTextBox as a string.
+        /// </summary>
+        /// <param name="textBox"></param>
+        /// <returns></returns>
+        /// // TODO: Change to computed property
+        private string GetText(RichTextBox textBox) {
+            var range = new TextRange(textBox.Document.ContentStart, textBox.Document.ContentEnd);
+            return range.Text;
+        }
+
         private void ReEvaluateParagraphs(RichTextBox textBox, IEnumerable<Paragraph> paragraphs) {
 
             this.disableTextChangedEvent = true;
@@ -97,7 +99,8 @@ namespace CodeEditor.Views {
         }
 
         /// <summary>
-        /// 
+        /// Evaluate the specified paragraph, by getting list of Inlines,
+        /// and format them as needed.
         /// </summary>
         /// <param name="textBox"></param>
         /// <param name="paragraph"></param>
@@ -112,27 +115,27 @@ namespace CodeEditor.Views {
                 return;
             }
 
-            Inline cursorNeighboutingElement;
-            LinkedList<Inline> inlines = GetListOfInlines(list, out cursorNeighboutingElement);
+            Inline cursorNeighbouringElement;
+            LinkedList<Inline> inlines = GetListOfInlines(list, out cursorNeighbouringElement);
 
-            this.ReAssignInlinesInParagraph(textBox, paragraph, inlines, cursorNeighboutingElement);
+            this.ReAssignInlinesInParagraph(textBox, paragraph, inlines, cursorNeighbouringElement);
         }
 
         /// <summary>
-        /// 
+        /// Returns a list of formatted Inline-objects in a list of words.
         /// </summary>
-        /// <param name="list"></param>
+        /// <param name="words"></param>
         /// <param name="cursorNeighbouringElement"></param>
         /// <returns></returns>
-        private LinkedList<Inline> GetListOfInlines(List<string> list, out Inline cursorNeighbouringElement) {
+        private LinkedList<Inline> GetListOfInlines(List<string> words, out Inline cursorNeighbouringElement) {
 
             var stringBuilder = new StringBuilder();
             var inlines = new LinkedList<Inline>();
             var wordAroundCaretContentType = ContentType.PlainText;
             cursorNeighbouringElement = null;
 
-            for (var i = 0; i < list.Count; i++) {
-                var word = list[i];
+            for (var i = 0; i < words.Count; i++) {
+                var word = words[i];
 
                 // If this is the caret
                 if (word == null) {
@@ -157,8 +160,8 @@ namespace CodeEditor.Views {
                 }
 
                 // Check if upcoming is the caret pointer (null value) and it is not at the end
-                if (i < (list.Count - 2) && list[i + 1] == null) {
-                    wordAroundCaretContentType = syntaxProcessor.ContentTypeForWord(word + list[i + 2]);
+                if (i < (words.Count - 2) && words[i + 1] == null) {
+                    wordAroundCaretContentType = syntaxProcessor.ContentTypeForWord(word + words[i + 2]);
 
                     if (wordAroundCaretContentType > 0) {
 
@@ -197,7 +200,8 @@ namespace CodeEditor.Views {
         }
 
         /// <summary>
-        /// 
+        /// Reassign the specified Inline-objects in the list, in the paragraph they belong.
+        /// This method will clear the affected paragraph and rewrite the contents with formatting.
         /// </summary>
         /// <param name="textBox"></param>
         /// <param name="paragraph"></param>
@@ -217,7 +221,7 @@ namespace CodeEditor.Views {
         }
 
         /// <summary>
-        /// 
+        /// Extract a list of words in a paragraph.
         /// </summary>
         /// <param name="textBox"></param>
         /// <param name="paragraph"></param>
@@ -239,10 +243,6 @@ namespace CodeEditor.Views {
 
                 // If there's no text on either side of the caret, we're on an empty line
                 if (beforeText == "" && afterText == "") {
-
-                    if (this.DisableAddingWhiteSpacesOnEnter) {
-                        return null;
-                    }
 
                     // Add white space to the new line - same as the previous line
                     var prev = paragraph.PreviousBlock as Paragraph;

@@ -5,38 +5,30 @@ using System.Windows.Input;
 using CodeEditor.Commands;
 using Microsoft.Win32;
 
-namespace CodeEditor.ViewModels
-{
-    public class MainWindowViewModel : ViewModel
-    {
+namespace CodeEditor.ViewModels {
+
+    public class MainWindowViewModel : ViewModel {
+
         #region Members of ICommand - Commands for functionality on the MainWindow
-        public ICommand CloseMainWindowCommand
-        {
-            get
-            {
+        public ICommand CloseMainWindowCommand {
+            get {
                 return new ActionCommand(o => CloseMainWindow());
             }
         }
 
-        public ICommand SaveCommand
-        {
-            get
-            {
+        public ICommand SaveCommand {
+            get {
                 return new ActionCommand(o => SaveFile());
             }
         }
 
-        public ICommand OpenCommand
-        {
-            get
-            {
+        public ICommand OpenCommand {
+            get {
                 return new ActionCommand(o => OpenFile());
             }
         }
-        public ICommand NewCommand
-        {
-            get
-            {
+        public ICommand NewCommand {
+            get {
                 return new ActionCommand(o => NewFile());
             }
         }
@@ -49,11 +41,9 @@ namespace CodeEditor.ViewModels
         /// </summary>
         private string _TextFile;
 
-        public string TextFile
-        {
+        public string TextFile {
             get { return _TextFile; }
-            set
-            {
+            set {
                 _TextFile = value;
                 NotifyPropertyChanged();
             }
@@ -64,12 +54,10 @@ namespace CodeEditor.ViewModels
         /// Creates a new file as the user specifies.
         /// By Jakob A. Nielsen
         /// </summary>
-        public void NewFile()
-        {
+        public void NewFile() {
             TextFile = "";
 
-            try
-            {
+            try {
                 SaveFileDialog dlg = new SaveFileDialog();
                 dlg.Title = "Create new file...";
                 dlg.Filter = "Text file (*.txt)|*.txt";
@@ -78,8 +66,7 @@ namespace CodeEditor.ViewModels
 
                 File.WriteAllText(dlg.FileName, "");
             }
-            catch
-            {
+            catch {
                 MessageBox.Show("Cancelled", "Info Message", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
@@ -88,12 +75,10 @@ namespace CodeEditor.ViewModels
         /// Opens a file and display it in the textbox.
         /// By Jakob A. Nielsen
         /// </summary>
-        public void OpenFile()
-        {
+        public void OpenFile() {
             int iLines = 0;
 
-            try
-            {
+            try {
                 OpenFileDialog dlg = new OpenFileDialog();
                 dlg.Title = "Open file...";
                 dlg.Filter = "Text file (*.txt)|*.txt";
@@ -104,20 +89,15 @@ namespace CodeEditor.ViewModels
 
                 TextFile = "";
 
-                foreach (string line in lines)
-                {
-                    if (line == "")
-                    {
+                foreach (string line in lines) {
+                    if (line == "") {
                         TextFile += "\n";
                     }
-                    else
-                    {
-                        if (iLines == lines.Length - 1)
-                        {
+                    else {
+                        if (iLines == lines.Length - 1) {
                             TextFile += line;
                         }
-                        else
-                        {
+                        else {
                             TextFile += line + "\n";
                         }
                     }
@@ -125,8 +105,7 @@ namespace CodeEditor.ViewModels
                     iLines++;
                 }
             }
-            catch
-            {
+            catch {
                 MessageBox.Show("Cancelled", "Info Message", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
@@ -135,28 +114,23 @@ namespace CodeEditor.ViewModels
         /// Saves the current text to file of own choice.
         /// By JakobA. Nielsen
         /// </summary>
-        public void SaveFile()
-        {
-            try
-            {
+        public void SaveFile() {
+            try {
                 SaveFileDialog dlg = new SaveFileDialog();
                 dlg.Title = "Save file...";
                 dlg.Filter = "Text file (*.txt)|*.txt";
                 dlg.FilterIndex = 1;
                 dlg.ShowDialog();
 
-                if (!String.IsNullOrEmpty(TextFile))
-                {
-                    foreach (string _Textline in TextFile.Split('\n'))
-                    {
+                if (!String.IsNullOrEmpty(TextFile)) {
+                    foreach (string _Textline in TextFile.Split('\n')) {
                         string Textline = _Textline.TrimEnd('\r');
 
                         File.WriteAllText(dlg.FileName, _TextFile);
                     }
                 }
             }
-            catch
-            {
+            catch {
                 MessageBox.Show("Cancelled", "Info Message", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
@@ -165,10 +139,9 @@ namespace CodeEditor.ViewModels
         /// Closes the application.
         /// By Jakob A. Nielsen
         /// </summary>
-        public void CloseMainWindow()
-        {
+        public void CloseMainWindow() {
             Application.Current.Shutdown();
         }
-    #endregion
+        #endregion
     }
 }

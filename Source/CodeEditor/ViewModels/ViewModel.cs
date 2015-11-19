@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace CodeEditor.ViewModels {
 
-    using CodeEditor.Models;
+    using Models;
 
     /// <summary>
     /// A base class for all View Models.
