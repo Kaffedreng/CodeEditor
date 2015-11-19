@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 
 namespace CodeEditor.Views {
 
@@ -10,7 +9,6 @@ namespace CodeEditor.Views {
 
         public MainWindow() {
             InitializeComponent();
-            // Initialize Plugins, etc.
             Bootstrap.Initialize();
         }
     }

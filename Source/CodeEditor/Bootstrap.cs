@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using CodeEditor.Plugins;
 
@@ -12,12 +8,15 @@ namespace CodeEditor {
 
         public static Dictionary<string, IPlugin> plugins = new Dictionary<string, IPlugin>();
 
+        /// <summary>
+        /// Collects plugins, if there is any, and initializes them.
+        /// </summary>
         public static void Initialize() {
 
             // Check for updates
 
             // Load Plug-Ins
-            ICollection<IPlugin> loadedPlugins = PluginLoader<IPlugin>.LoadPlugins("Plugins");
+            var loadedPlugins = PluginLoader<IPlugin>.LoadPlugins("Plugins");
             if (loadedPlugins != null)
             {
                 foreach (var item in loadedPlugins)
@@ -29,7 +28,7 @@ namespace CodeEditor {
                 foreach (var item in plugins)
                 {
                     IPlugin plugin = item.Value;
-                    //plugin.Initialize();
+                    plugin.Initialize();
                     plugin.Do();
                 }
             }

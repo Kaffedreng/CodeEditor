@@ -1,8 +1,5 @@
 ﻿using System.Windows;
 
-//using CodeEditor.Interfaces;
-//using CodeEditor.Plugins;
-
 namespace CodeEditor.Plugins {
     internal class SamplePlugin : IPlugin {
 
