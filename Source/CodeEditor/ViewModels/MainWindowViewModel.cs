@@ -2,10 +2,11 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
-using CodeEditor.Views;
 using Microsoft.Win32;
 
 namespace CodeEditor.ViewModels {
+
+    using CodeEditor.Commands;
 
     class MainWindowViewModel : ViewModel
     {
