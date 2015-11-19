@@ -10,7 +10,11 @@
         <viewModels:PluginManagerVm x:Key="ViewModel"></viewModels:PluginManagerVm>
         <viewModels:MainWindowViewModel x:Key="MainVM"></viewModels:MainWindowViewModel>
     </Window.Resources>
+    
+   <!-- Main Grid -->
     <Grid DataContext="{DynamicResource MainVM}">
+        
+        <!-- Main Menu -->
         <Menu x:Name="menu" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="517">
             <MenuItem Header="File" Margin="0" VerticalAlignment="Center" Height="20">
                 <MenuItem Header="New file" Command="{Binding NewCommand}"></MenuItem>
@@ -30,7 +34,6 @@
                     </Style>
                 </RichTextBox.Resources>
                 <FlowDocument FontFamily="Consolas" FontSize="11" IsColumnWidthFlexible="False" LineHeight="1">
-                    <Paragraph>SELECT
                 </FlowDocument>
             </RichTextBox>
         </DockPanel>
