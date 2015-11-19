@@ -66,6 +66,7 @@
     <Compile Include="Views\PluginManager.xaml.cs">
       <DependentUpon>PluginManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\TextEditorControl.cs" />
     <Page Include="Views\PluginManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
