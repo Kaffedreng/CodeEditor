@@ -12,7 +12,7 @@ namespace CodeEditor.SyntaxHighlighting {
     /// The BaseSyntaxProcessor handles non-language specific keywords.
     /// All SyntaxProcessor-classes must subclass this class, and apply custom formatting if needed.
     /// </summary>
-    public class BaseSyntaxProcessor : ISyntaxProcessor {
+    public abstract class BaseSyntaxProcessor : ISyntaxProcessor {
 
         private static Regex splitRegex = new Regex(@"(\s|\(|\)|\+|\-|\%|\*|\[|\]|/)", RegexOptions.Compiled);
 
