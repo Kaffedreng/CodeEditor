@@ -56,6 +56,24 @@ namespace CodeEditor.SyntaxHighlighting {
         };
         #endregion
 
+        public BaseSyntaxProcessor() {
+            if (this is ISyntaxProcessorCustomization) {
+                var customizedThis = (ISyntaxProcessorCustomization)this;
+
+                // TODO: Enumerate all Content Types and add keywords from them
+
+                foreach (var keyword in customizedThis.CustomKeywordsForContentType(ContentType.Keywords)) {
+                    keywords.Add(keyword);
+                }
+
+                foreach (var function in customizedThis.CustomKeywordsForContentType(ContentType.ProjectFunctionAndMethodNames)) {
+                    functions.Add(function);
+                }
+
+                // TODO: Do the same for all content types
+            }
+        }
+
         public Regex SplitWordsRegex {
             get {
                 return splitRegex;
