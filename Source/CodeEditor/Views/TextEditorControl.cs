@@ -36,67 +36,10 @@ namespace CodeEditor.Views {
             this.Resources.Add(typeof(Paragraph), style);
         }
 
-        //public string ParagraphProcessorType {
-        //    get {
-        //        return this.syntaxProcessor.GetType().FullName;
-        //    }
-        //    set {
-        //        if (String.IsNullOrEmpty(value)) {
-        //            throw new ArgumentException("ParagraphProcessorType cannot be null or empty string");
-        //        }
-
-        //        var type = Type.GetType(value);
-        //        if (type == null) {
-        //            throw new ArgumentException(
-        //                String.Format("Type '{0}' passed to ParagraphProcessorType cannot be recognized", value));
-        //        }
-
-        //        if (!typeof(ISyntaxProcessor).IsAssignableFrom(type)) {
-        //            throw new ArgumentException(
-        //                String.Format("Type '{0}' passed to ParagraphProcessorType must implement IParagraphProcessor", type));
-        //        }
-
-        //        Console.WriteLine("Using Syntax Processor: {0}", type);
-        //        this.syntaxProcessor = (ISyntaxProcessor)Activator.CreateInstance(type);
-        //    }
-        //}
-
-        /// <summary>
-        /// If you want to pass long text please use SetLongText method instead
-        /// </summary>
-        //public string Text {
-        //    get {
-        //        var range = new TextRange(this.Document.ContentStart, this.Document.ContentEnd);
-        //        return range.Text;
-        //    }
-        //    set {
-        //        if (String.IsNullOrEmpty(value)) {
-        //            new TextRange(this.Document.ContentStart, this.Document.ContentEnd) { Text = value };
-        //        }
-        //        else {
-        //            this.SetLongText(value);
-        //        }
-        //    }
-        //}
-
         private string GetText(RichTextBox textBox) {
             var range = new TextRange(textBox.Document.ContentStart, textBox.Document.ContentEnd);
             return range.Text;
         }
-
-        //private void SetLongText(string text) {
-        //    this.disableTextChangedEvent = true;
-
-        //    var lines = text.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-
-        //    foreach (var line in lines) {
-        //        var p = new Paragraph();
-        //        this.Document.Blocks.Add(p);
-        //        this.EvaluateParagraph(p, new List<string>(this.syntaxProcessor.SplitWordsRegex.Split(line)));
-        //    }
-
-        //    this.disableTextChangedEvent = false;
-        //}
 
         /// <summary>
         /// 
