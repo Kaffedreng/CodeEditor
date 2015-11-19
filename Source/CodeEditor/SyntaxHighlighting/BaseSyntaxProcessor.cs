@@ -81,7 +81,7 @@ namespace CodeEditor.SyntaxHighlighting {
         }
 
         public ContentType ContentTypeForWord(string word) {
-
+            // TODO: Implement for all contenttypes
             if (keywords.Contains(word)) {
                 return ContentType.Keywords;
             }
@@ -94,12 +94,26 @@ namespace CodeEditor.SyntaxHighlighting {
         }
 
         public Inline FormatInlineWithContentType(Inline inline, ContentType contentType) {
-            switch (contentType) {
+            
+                var customizedThis = (ISyntaxProcessorCustomization)this;
+                Color color;
+
+                switch (contentType) {
 
                 case ContentType.Comments:
                 case ContentType.DocumentationMarkup:
                 case ContentType.DocumentationMarkupKeywords:
                     inline.Foreground = new SolidColorBrush(Color.FromArgb(255, 100, 100, 100));
+                    break;
+
+                case ContentType.Keywords:
+                        color = customizedThis.CustomFontColorForContentType(ContentType.Keywords) ?? Color.FromArgb(255, 100, 200, 100);
+                        inline.Foreground = new SolidColorBrush(color);
+                    break;
+
+                case ContentType.ProjectFunctionAndMethodNames:
+                        color = customizedThis.CustomFontColorForContentType(ContentType.ProjectFunctionAndMethodNames) ?? Color.FromArgb(255, 200, 100, 100);
+                        inline.Foreground = new SolidColorBrush(color);
                     break;
 
                 default:
