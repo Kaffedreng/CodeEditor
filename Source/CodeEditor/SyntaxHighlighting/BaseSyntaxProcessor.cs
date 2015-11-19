@@ -27,6 +27,7 @@ namespace CodeEditor.SyntaxHighlighting {
             // Data Types
             "int",
             "string",
+            "bool",
 
             // Flow Control
             "if",
@@ -38,10 +39,14 @@ namespace CodeEditor.SyntaxHighlighting {
             "new",
 
             // Access Modifiers
+            "using",
+            "namespace",
             "public",
             "protected",
             "private",
-            "static"
+            "static",
+            "get",
+            "set"
         };
         #endregion
 
